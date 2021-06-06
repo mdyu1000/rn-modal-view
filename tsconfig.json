@@ -1,0 +1,20 @@
+
+{
+  "compilerOptions": {
+    "lib": ["es2017"],                       
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": false,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "strict": true,
+    "target": "esnext",
+    "resolveJsonModule": true,
+    "outDir": "./dist",
+    "declaration": true,
+    "types": ["react", "jest"]
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules", "babel.config.js", "metro.config.js", "jest.config.js"
+  ]
+}
