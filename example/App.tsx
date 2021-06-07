@@ -109,7 +109,7 @@ const App = () => {
           onBackdropPress={toggleVisible}
           onModalHide={initModal}
         >
-          <View>
+          <View style={[styles.modalView]}>
             <Text style={[styles.title]}>Title</Text>
             <Text style={[styles.content]}>
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
