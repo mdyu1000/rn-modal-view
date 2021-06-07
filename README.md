@@ -77,3 +77,6 @@ The `isVisible` prop is the only prop you'll really need to make the modal work:
 | onModalWillShow                | func             | () => null                     | Called before the modal show animation begins                                                                                              |
 | onModalShow                    | func             | () => null                     | Called when the modal is completely visible                                                                                                |
 | style                          | any              | null                           | Style applied to the modal                                         
+| zIndex                          | number              | 101                           | The property specifies the stack order of an element, An element with greater stack order is always in front of an element with a lower stack order.
+
+
