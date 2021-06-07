@@ -21,7 +21,7 @@ export interface IReactNativeModalView {
   children: ReactNode
   hasBackdrop?: boolean,
   isVisible: boolean
-  modalStyle?: ViewStyle | null
+  style?: ViewStyle | null
   zIndex?: number,
   onBackdropPress?: (event: GestureResponderEvent) => void
   onBackButtonPress?: () => void

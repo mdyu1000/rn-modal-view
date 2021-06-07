@@ -31,7 +31,7 @@ function ReactNativeModalView(props: IReactNativeModalView): React.ReactElement 
     children,
     hasBackdrop,
     isVisible,
-    modalStyle,
+    style,
     zIndex,
     onBackdropPress,
     onBackButtonPress,
@@ -91,7 +91,7 @@ function ReactNativeModalView(props: IReactNativeModalView): React.ReactElement 
         >
           <StatusBar barStyle={hasBackdrop ? 'light-content' : 'dark-content'} />
           <TouchableWithoutFeedback>
-            <View style={[modalStyle || styles.modal]}>
+            <View style={[style || styles.modal]}>
               <Animatable.View
                 ref={animatedViewRef}
                 animation={animationIn}
