@@ -86,7 +86,7 @@ const App = () => {
           animationOut={animationOut}
           hasBackdrop={hasBackdrop}
           isVisible={isVisible}
-          modalStyle={modalStyle}
+          style={modalStyle}
           onBackdropPress={toggleVisible}
           onBackButtonPress={toggleVisible}
           onModalHide={initModal}
@@ -104,7 +104,7 @@ const App = () => {
         </ReactNativeModalView>
         <ReactNativeModalView
           isVisible={isVisible2}
-          modalStyle={modalStyle2}
+          style={modalStyle2}
           hasBackdrop={false}
           onBackdropPress={toggleVisible}
           onModalHide={initModal}
