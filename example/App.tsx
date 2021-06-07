@@ -91,7 +91,7 @@ const App = () => {
           onBackButtonPress={toggleVisible}
           onModalHide={initModal}
         >
-          <View>
+          <View style={[styles.modalView]}>
             <Text style={[styles.title]}>Title</Text>
             <Text style={[styles.content]}>
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
@@ -151,6 +151,11 @@ const styles = StyleSheet.create({
     fontSize: 17,
     lineHeight: 24,
     fontWeight: '500',
+  },
+  modalView: {
+    backgroundColor: 'white',
+    borderRadius: 2,
+    padding: 24,
   },
 })
 

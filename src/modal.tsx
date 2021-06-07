@@ -96,7 +96,6 @@ function ReactNativeModalView(props: IReactNativeModalView): React.ReactElement 
                 ref={animatedViewRef}
                 animation={animationIn}
                 duration={animationInTiming}
-                style={[styles.modalView]}
                 onAnimationEnd={handleAnimationEnd}
               >
                 {children}
@@ -126,11 +125,6 @@ const styles = StyleSheet.create({
     marginBottom: 'auto',
     marginLeft: 24,
     marginRight: 24,
-  },
-  modalView: {
-    backgroundColor: 'white',
-    borderRadius: 2,
-    padding: 24,
   },
 })
 
