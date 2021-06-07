@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Pressable, Text, View, StyleSheet, ViewStyle } from 'react-native'
+import { Pressable, Text, View, StyleSheet, ViewStyle, TextInput, Keyboard } from 'react-native'
 import { Animation } from 'react-native-animatable'
 import ReactNativeModalView from 'rn-modal-view'
 
@@ -13,15 +13,20 @@ const App = () => {
   // additional modal
   const [isVisible2, setIsVisible2] = useState(false)
   const [modalStyle2, setModalStyle2] = useState<ViewStyle | null>(null)
+  // additional modal
+  const [isVisible3, setIsVisible3] = useState(false)
+  const [modalStyle3, setModalStyle3] = useState<ViewStyle | null>(null)
 
   const toggleVisible = () => {
     setIsVisible(!isVisible)
     setIsVisible2(false)
+    setIsVisible3(false)
   }
 
   const initModal = () => {
     setModalStyle(null)
     setModalStyle2(null)
+    setModalStyle3(null)
     setAnimationIn('fadeInUp')
     setAnimationOut('fadeOutDown')
     setHasBackdrop(true)
@@ -57,6 +62,16 @@ const App = () => {
     setModalStyle2({ marginTop: 'auto' })
   }
 
+  const handlePressKeyboardAvoidView = () => {
+    setIsVisible3(true)
+    setModalStyle3({ marginTop: 'auto' })
+  }
+
+  const closeModal3 = () => {
+    setIsVisible3(false)
+    Keyboard.dismiss()
+  }
+
   return (
     <View style={{ flex: 1 }}>
       <View
@@ -81,46 +96,77 @@ const App = () => {
         <Pressable style={[styles.button]} onPress={handlePressMultipleModal}>
           <Text>Multiple Modal</Text>
         </Pressable>
+        <Pressable style={[styles.button]} onPress={handlePressKeyboardAvoidView}>
+          <Text>Keyboard Avoid View</Text>
+        </Pressable>
         <ReactNativeModalView
+          isVisible={isVisible}
+          style={modalStyle}
           animationIn={animationIn}
           animationOut={animationOut}
           hasBackdrop={hasBackdrop}
-          isVisible={isVisible}
-          style={modalStyle}
           onBackdropPress={toggleVisible}
           onBackButtonPress={toggleVisible}
           onModalHide={initModal}
         >
-          <View style={[styles.modalView]}>
-            <Text style={[styles.title]}>Title</Text>
-            <Text style={[styles.content]}>
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua.
-            </Text>
-            <Pressable style={[styles.action]} onPress={toggleVisible}>
-              <Text style={[styles.actionText]}>Close</Text>
-            </Pressable>
-          </View>
+          <BaseChildren onPress={toggleVisible} />
         </ReactNativeModalView>
         <ReactNativeModalView
           isVisible={isVisible2}
           style={modalStyle2}
           hasBackdrop={false}
           onBackdropPress={toggleVisible}
+          onBackButtonPress={toggleVisible}
           onModalHide={initModal}
         >
-          <View style={[styles.modalView]}>
-            <Text style={[styles.title]}>Title</Text>
-            <Text style={[styles.content]}>
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua.
-            </Text>
-            <Pressable style={[styles.action]} onPress={toggleVisible}>
-              <Text style={[styles.actionText]}>Close</Text>
-            </Pressable>
-          </View>
+          <BaseChildren onPress={toggleVisible} />
+        </ReactNativeModalView>
+        <ReactNativeModalView
+          isVisible={isVisible3}
+          style={modalStyle3}
+          animationIn={animationIn}
+          animationOut={animationOut}
+          hasBackdrop={hasBackdrop}
+          onBackdropPress={closeModal3}
+          onBackButtonPress={closeModal3}
+          onModalHide={initModal}
+        >
+          <InputChildren onPress={closeModal3} />
         </ReactNativeModalView>
       </View>
+    </View>
+  )
+}
+
+interface IBaseChildren {
+  onPress: () => void
+}
+
+function BaseChildren(props: IBaseChildren): React.ReactElement {
+  const { onPress } = props
+  return (
+    <View style={[styles.modalView]}>
+      <Text style={[styles.title]}>Title</Text>
+      <Text style={[styles.content]}>
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua.
+      </Text>
+      <Pressable style={[styles.action]} onPress={onPress}>
+        <Text style={[styles.actionText]}>Close</Text>
+      </Pressable>
+    </View>
+  )
+}
+
+function InputChildren(props: IBaseChildren): React.ReactElement {
+  const { onPress } = props
+  return (
+    <View style={[styles.modalView]}>
+      <Text style={[styles.title]}>Title</Text>
+      <TextInput style={[styles.textField]} placeholder="placeholder" />
+      <Pressable style={[styles.action]} onPress={onPress}>
+        <Text style={[styles.actionText]}>Close</Text>
+      </Pressable>
     </View>
   )
 }
@@ -157,6 +203,14 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     padding: 24,
   },
+  textField: {
+    height: 56,
+    backgroundColor: '#f2f6f9',
+    paddingHorizontal: 16,
+    fontSize: 17,
+    lineHeight: 24,
+    marginTop: 16,
+  }
 })
 
 export default App
