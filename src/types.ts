@@ -1,9 +1,5 @@
 import { ReactNode } from 'react'
-import {
-  GestureResponderEvent,
-  ViewStyle,
-  BackHandlerStatic
-} from 'react-native'
+import { GestureResponderEvent, ViewStyle, BackHandlerStatic } from 'react-native'
 import { Animation, CustomAnimation } from 'react-native-animatable'
 export interface IBackdropAnimation {
   fadeIn: CustomAnimation
@@ -11,18 +7,18 @@ export interface IBackdropAnimation {
 }
 
 export interface IReactNativeModalView {
-  animationIn?: Animation
+  animationIn?: Animation | CustomAnimation
   animationInTiming?: number
-  animationOut?: Animation
+  animationOut?: Animation | CustomAnimation
   animationOutTiming?: number
   backdropStyle?: ViewStyle
   backdropTransitionInTiming?: number
   backdropTransitionOutTiming?: number
   children: ReactNode
-  hasBackdrop?: boolean,
+  hasBackdrop?: boolean
   isVisible: boolean
   style?: ViewStyle | null
-  zIndex?: number,
+  zIndex?: number
   onBackdropPress?: (event: GestureResponderEvent) => void
   onBackButtonPress?: () => void
   onModalShow?: () => void
