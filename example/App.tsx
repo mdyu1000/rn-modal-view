@@ -1,216 +1,75 @@
 import React, { useState } from 'react'
-import { Pressable, Text, View, StyleSheet, ViewStyle, TextInput, Keyboard } from 'react-native'
+import { Pressable, Text, View, StyleSheet } from 'react-native'
 import { Animation } from 'react-native-animatable'
-import ReactNativeModalView from 'rn-modal-view'
+import ReactNativeModalView from './ReactNativeModalView'
+// modals
+import DefaultModal from './src/component/DefaultModal'
+import BottomModal from './src/component/BottomModal'
+import HorizontalModal from './src/component/HorizontalModal'
+import BottomNoBackdropModal from './src/component/BottomNoBackdropModal'
+import MultipleModal from './src/component/MultipleModal'
+import KeyboardAvoidModal from './src/component/KeyboardAvoidModal'
+import FullModal from './src/component/FullModal'
 
 const App = () => {
-  // Base Modal
-  const [isVisible, setIsVisible] = useState(false)
-  const [modalStyle, setModalStyle] = useState<ViewStyle | null>(null)
-  const [animationIn, setAnimationIn] = useState<Animation>('fadeInUp')
-  const [animationOut, setAnimationOut] = useState<Animation>('fadeOutDown')
-  const [hasBackdrop, setHasBackdrop] = useState(true)
-  // additional modal
-  const [isVisible2, setIsVisible2] = useState(false)
-  const [modalStyle2, setModalStyle2] = useState<ViewStyle | null>(null)
-  // additional modal
-  const [isVisible3, setIsVisible3] = useState(false)
-  const [modalStyle3, setModalStyle3] = useState<ViewStyle | null>(null)
-
-  const toggleVisible = () => {
-    setIsVisible(!isVisible)
-    setIsVisible2(false)
-    setIsVisible3(false)
-  }
-
-  const initModal = () => {
-    setModalStyle(null)
-    setModalStyle2(null)
-    setModalStyle3(null)
-    setAnimationIn('fadeInUp')
-    setAnimationOut('fadeOutDown')
-    setHasBackdrop(true)
-  }
-
-  const handlePressBottom = () => {
-    toggleVisible()
-    setModalStyle({ marginTop: 'auto' })
-  }
-
-  const handlePressBottomNoBackdrop = () => {
-    toggleVisible()
-    setModalStyle({
-      marginTop: 'auto',
-      shadowColor: '#063255',
-      shadowOpacity: 0.3,
-      shadowOffset: { width: 0, height: 0 },
-      shadowRadius: 15,
-      elevation: 12,
-    })
-    setHasBackdrop(false)
-  }
-
-  const handlePressHorizontal = () => {
-    toggleVisible()
-    setAnimationIn('fadeInLeft')
-    setAnimationOut('fadeOutRight')
-  }
-
-  const handlePressMultipleModal = () => {
-    toggleVisible()
-    setIsVisible2(true)
-    setModalStyle2({ marginTop: 'auto' })
-  }
-
-  const handlePressKeyboardAvoidView = () => {
-    setIsVisible3(true)
-    setModalStyle3({ marginTop: 'auto' })
-  }
-
-  const closeModal3 = () => {
-    setIsVisible3(false)
-    Keyboard.dismiss()
-  }
+  const [isDefaultVisible, setIsDefaultVisible] = useState(false)
+  const [isBottomVisible, setIsBottomVisible] = useState(false)
+  const [isHorizontalVisible, setIsHorizontalVisible] = useState(false)
+  const [isBottomNoBackdropVisible, setIsBottomNoBackdropVisible] = useState(false)
+  const [isMultipleVisible, setIsMultipleVisible] = useState(false)
+  const [isKeyboardAvoidVisible, setIsKeyboardAvoidVisible] = useState(false)
+  const [isFullVisible, setIsFullVisible] = useState(false)
 
   return (
-    <View style={{ flex: 1 }}>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Pressable style={[styles.button]} onPress={toggleVisible}>
-          <Text>Default</Text>
-        </Pressable>
-        <Pressable style={[styles.button]} onPress={handlePressBottom}>
-          <Text>Bottom</Text>
-        </Pressable>
-        <Pressable style={[styles.button]} onPress={handlePressHorizontal}>
-          <Text>Horizontal</Text>
-        </Pressable>
-        <Pressable style={[styles.button]} onPress={handlePressBottomNoBackdrop}>
-          <Text>Bottom no backdrop</Text>
-        </Pressable>
-        <Pressable style={[styles.button]} onPress={handlePressMultipleModal}>
-          <Text>Multiple Modal</Text>
-        </Pressable>
-        <Pressable style={[styles.button]} onPress={handlePressKeyboardAvoidView}>
-          <Text>Keyboard Avoid View</Text>
-        </Pressable>
-        <ReactNativeModalView
-          isVisible={isVisible}
-          style={modalStyle}
-          animationIn={animationIn}
-          animationOut={animationOut}
-          hasBackdrop={hasBackdrop}
-          onBackdropPress={toggleVisible}
-          onBackButtonPress={toggleVisible}
-          onModalHide={initModal}
-        >
-          <BaseChildren onPress={toggleVisible} />
-        </ReactNativeModalView>
-        <ReactNativeModalView
-          isVisible={isVisible2}
-          style={modalStyle2}
-          hasBackdrop={false}
-          onBackdropPress={toggleVisible}
-          onBackButtonPress={toggleVisible}
-          onModalHide={initModal}
-        >
-          <BaseChildren onPress={toggleVisible} />
-        </ReactNativeModalView>
-        <ReactNativeModalView
-          isVisible={isVisible3}
-          style={modalStyle3}
-          animationIn={animationIn}
-          animationOut={animationOut}
-          hasBackdrop={hasBackdrop}
-          onBackdropPress={closeModal3}
-          onBackButtonPress={closeModal3}
-          onModalHide={initModal}
-        >
-          <InputChildren onPress={closeModal3} />
-        </ReactNativeModalView>
-      </View>
-    </View>
-  )
-}
-
-interface IBaseChildren {
-  onPress: () => void
-}
-
-function BaseChildren(props: IBaseChildren): React.ReactElement {
-  const { onPress } = props
-  return (
-    <View style={[styles.modalView]}>
-      <Text style={[styles.title]}>Title</Text>
-      <Text style={[styles.content]}>
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua.
-      </Text>
-      <Pressable style={[styles.action]} onPress={onPress}>
-        <Text style={[styles.actionText]}>Close</Text>
+    <View style={[styles.view]}>
+      <Pressable style={[styles.button]} onPress={() => setIsDefaultVisible(true)}>
+        <Text>Default</Text>
       </Pressable>
-    </View>
-  )
-}
-
-function InputChildren(props: IBaseChildren): React.ReactElement {
-  const { onPress } = props
-  return (
-    <View style={[styles.modalView]}>
-      <Text style={[styles.title]}>Title</Text>
-      <TextInput style={[styles.textField]} placeholder="placeholder" />
-      <Pressable style={[styles.action]} onPress={onPress}>
-        <Text style={[styles.actionText]}>Close</Text>
+      <Pressable style={[styles.button]} onPress={() => setIsBottomVisible(true)}>
+        <Text>Bottom</Text>
       </Pressable>
+      <Pressable style={[styles.button]} onPress={() => setIsHorizontalVisible(true)}>
+        <Text>Horizontal</Text>
+      </Pressable>
+      <Pressable style={[styles.button]} onPress={() => setIsBottomNoBackdropVisible(true)}>
+        <Text>Bottom no backdrop</Text>
+      </Pressable>
+      <Pressable style={[styles.button]} onPress={() => setIsMultipleVisible(true)}>
+        <Text>Multiple Modal</Text>
+      </Pressable>
+      <Pressable style={[styles.button]} onPress={() => setIsKeyboardAvoidVisible(true)}>
+        <Text>Keyboard Avoid View</Text>
+      </Pressable>
+      <Pressable style={[styles.button]} onPress={() => setIsFullVisible(true)}>
+        <Text>Full Modal</Text>
+      </Pressable>
+      <DefaultModal isVisible={isDefaultVisible} toggleVisible={() => setIsDefaultVisible(false)} />
+      <BottomModal isVisible={isBottomVisible} toggleVisible={() => setIsBottomVisible(false)} />
+      <HorizontalModal isVisible={isHorizontalVisible} toggleVisible={() => setIsHorizontalVisible(false)} />
+      <BottomNoBackdropModal
+        isVisible={isBottomNoBackdropVisible}
+        toggleVisible={() => setIsBottomNoBackdropVisible(false)}
+      />
+      <MultipleModal isVisible={isMultipleVisible} toggleVisible={() => setIsMultipleVisible(false)} />
+      <KeyboardAvoidModal
+        isVisible={isKeyboardAvoidVisible}
+        toggleVisible={() => setIsKeyboardAvoidVisible(false)}
+      />
+      <FullModal isVisible={isFullVisible} toggleVisible={() => setIsFullVisible(false)} />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  view: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   button: {
     padding: 8,
     marginTop: 8,
   },
-  title: {
-    fontSize: 24,
-    lineHeight: 30,
-  },
-  content: {
-    fontSize: 15,
-    lineHeight: 22,
-    marginTop: 8,
-  },
-  action: {
-    marginTop: 24,
-    paddingVertical: 16,
-    backgroundColor: 'black',
-    borderRadius: 2,
-    alignItems: 'center',
-  },
-  actionText: {
-    color: 'white',
-    fontSize: 17,
-    lineHeight: 24,
-    fontWeight: '500',
-  },
-  modalView: {
-    backgroundColor: 'white',
-    borderRadius: 2,
-    padding: 24,
-  },
-  textField: {
-    height: 56,
-    backgroundColor: '#f2f6f9',
-    paddingHorizontal: 16,
-    fontSize: 17,
-    lineHeight: 24,
-    marginTop: 16,
-  }
 })
 
 export default App
