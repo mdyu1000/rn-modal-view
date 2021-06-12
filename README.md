@@ -80,6 +80,24 @@ function DefaultModal(props) {
   )
 }
 ```
+## More examples
+```
+/
+├─ src/
+│  ├─ component/                   
+│  │  ├─ BottomModal.tsx                  
+│  │  ├─ BottomNoBackdropModal.tsx                  
+│  │  ├─ DefaultModal.tsx                  
+│  │  ├─ FullModal.tsx                  
+│  │  ├─ HorizontalModal.tsx                  
+│  │  ├─ KeyboardAvoidModal.tsx                  
+│  │  ├─ MultipleModal.tsx                  
+│  │
+│  ├─ lib/                   
+│  │  ├─ animation.tsx                  
+
+```
+
 
 ## Available props
 
@@ -104,3 +122,16 @@ function DefaultModal(props) {
 | zIndex                          | number              | 101                           | The property specifies the stack order of an element, An element with greater stack order is always in front of an element with a lower stack order.
 
 
+## Frequently Asked Questions
+
+**Trigger onBackdropPress event when click View**
+
+**My Modal is invisible**
+
+**How to place Modal to the bottom?**
+
+**How to change full modal slide-in start point?**
+
+**Can I customize Modal animation?**
+
+**Why zIndex default value is 101?**
