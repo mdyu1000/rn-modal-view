@@ -81,6 +81,7 @@ function DefaultModal(props) {
 }
 ```
 ## More examples
+The sample code of Demo is in the [example folder](https://github.com/mdyu1000/rn-modal-view/tree/master/example).
 ```
 /
 ├─ src/
@@ -94,7 +95,7 @@ function DefaultModal(props) {
 │  │  ├─ MultipleModal.tsx                  
 │  │
 │  ├─ lib/                   
-│  │  ├─ animation.tsx                  
+│  │  ├─ animation.ts         
 
 ```
 
@@ -125,6 +126,7 @@ function DefaultModal(props) {
 ## Frequently Asked Questions
 
 **Trigger onBackdropPress event when click View**
+Wrap <TouchableWithoutFeedback />
 
 **My Modal is invisible**
 
