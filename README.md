@@ -8,6 +8,7 @@ This module is base on **View** component rather than Modal, Modal component sti
 
 * Can't show multiple modals one after another.
 * Can't show multiple modals at the same time.
+* Can't show [react-native-loading-spinner-overlay](https://www.npmjs.com/package/react-native-loading-spinner-overlay) at the same time.
 * The StatusBar style changes (or not changes) when the modal shows up.
 * Screen changes when modal visible, component will remain some android device, that cause UI can't be touched.
 
@@ -30,32 +31,64 @@ $ yarn add rn-modal-view
 
 1. Import rn-modal-view 
 ```JSX
-import ReactNativeModalView from 'rn-modal-view'
+import Modal from 'rn-modal-view'
 ```
 
 2. Create a modal and nest its content inside of it:
    
 ```JSX
 return (
-  <ReactNativeModalView>
+  <Modal>
     <View>
       <Text>I am the modal content!</Text>
     </View>
-  </ReactNativeModalView>
+  </Modal>
 )
 ```
 3. Then simply show it by setting the `isVisible` prop to true:
 ```JSX
 return (
-  <ReactNativeModalView isVisible={isVisible}>
+  <Modal isVisible={isVisible}>
     <View>
       <Text>I am the modal content!</Text>
     </View>
-  </ReactNativeModalView>
+  </Modal>
 )
 ```
 
 The `isVisible` prop is the only prop you'll really need to make the modal work: you should control this prop value by saving it in your wrapper component state and setting it to `true` or `false` when needed.
+
+4. A complete example
+```JSX
+
+
+function App() {
+  const [isVisible, setIsVisible] = useState(false)
+
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Pressable onPress={() => setIsVisible(true)}>
+        <Text>Default</Text>
+      </Pressable>
+      <DefaultModal isVisible={isVisible} toggleVisible={() => setIsVisible(false)} />
+    </View>
+  )
+}
+
+function DefaultModal(props) {
+  const { isVisible, toggleVisible } = props
+
+  return (
+    <Modal isVisible={isVisible} onBackdropPress={toggleVisible}>
+      <TouchableWithoutFeedback>
+        <View style={{ backgroundColor: 'white' }}>
+          <Text>I am the modal content!</Text>
+        </View>
+      </TouchableWithoutFeedback>
+    </Modal>
+  )
+}
+```
 
 ## Available props
 
