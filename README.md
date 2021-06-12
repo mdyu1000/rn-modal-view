@@ -38,18 +38,8 @@ import Modal from 'rn-modal-view'
    
 ```JSX
 return (
-  <Modal>
-    <View>
-      <Text>I am the modal content!</Text>
-    </View>
-  </Modal>
-)
-```
-3. Then simply show it by setting the `isVisible` prop to true:
-```JSX
-return (
   <Modal isVisible={isVisible}>
-    <View>
+    <View style={{ backgroundColor: 'white' }}>
       <Text>I am the modal content!</Text>
     </View>
   </Modal>
@@ -58,7 +48,8 @@ return (
 
 The `isVisible` prop is the only prop you'll really need to make the modal work: you should control this prop value by saving it in your wrapper component state and setting it to `true` or `false` when needed.
 
-4. A complete example
+
+3. A complete example
 ```JSX
 
 
