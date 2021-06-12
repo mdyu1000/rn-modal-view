@@ -1,23 +1,36 @@
 import React, { useState } from 'react'
-import { Pressable, Text, TextInput, View, StyleSheet, TouchableWithoutFeedback } from 'react-native'
+import {
+  Pressable,
+  Text,
+  TextInput,
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native'
 import Modal from '../../ReactNativeModalView'
 import { IDefaultModal } from '../constant/types'
 
 function KeyboardAvoidModal(props: IDefaultModal): React.ReactElement {
   const { isVisible, toggleVisible } = props
 
+  const close = () => {
+    toggleVisible()
+    Keyboard.dismiss()
+  }
+
   return (
     <Modal
       isVisible={isVisible}
       style={{ justifyContent: 'flex-end' }}
-      onBackdropPress={toggleVisible}
-      onBackButtonPress={toggleVisible}
+      onBackdropPress={close}
+      onBackButtonPress={close}
     >
       <TouchableWithoutFeedback>
         <View style={[styles.modalView]}>
           <Text style={[styles.title]}>Title</Text>
           <TextInput style={[styles.textField]} placeholder="placeholder" />
-          <Pressable style={[styles.action]} onPress={toggleVisible}>
+          <Pressable style={[styles.action]} onPress={close}>
             <Text style={[styles.actionText]}>Close</Text>
           </Pressable>
         </View>

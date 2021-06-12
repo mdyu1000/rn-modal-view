@@ -20,7 +20,14 @@ function FullModal(props: IDefaultModal): React.ReactElement {
   const { isVisible, toggleVisible } = props
 
   return (
-    <Modal isVisible={isVisible} onBackdropPress={toggleVisible} onBackButtonPress={toggleVisible}>
+    <Modal
+      isVisible={isVisible}
+      style={{ justifyContent: 'flex-end' }}
+      animationIn={customSlideInUp}
+      animationOut={customSlideOutDown}
+      onBackdropPress={toggleVisible}
+      onBackButtonPress={toggleVisible}
+    >
       <TouchableWithoutFeedback>
         <KeyboardAvoidingView
           style={[styles.modalViewFull]}
@@ -43,10 +50,12 @@ function FullModal(props: IDefaultModal): React.ReactElement {
 }
 
 const styles = StyleSheet.create({
-  modalView: {
+  modalViewFull: {
+    flex: 1,
     backgroundColor: 'white',
     borderRadius: 2,
     padding: 24,
+    marginTop: 40,
   },
   title: {
     fontSize: 24,
