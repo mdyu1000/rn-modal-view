@@ -8,7 +8,7 @@ import {
   Dimensions,
   KeyboardAvoidingView,
 } from 'react-native'
-import Modal from '../../ReactNativeModalView'
+import Modal from 'rn-modal-view'
 import { makeSlideInTranslation, makeSlideOutTranslation } from '../lib/animation'
 import { IDefaultModal } from '../constant/types'
 
