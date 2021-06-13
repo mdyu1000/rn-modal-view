@@ -1,6 +1,6 @@
 {
   "name": "rn-modal-view",
-  "version": "1.0.6",
+  "version": "2.0.0",
   "description": "An enhanced React Native modal",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
