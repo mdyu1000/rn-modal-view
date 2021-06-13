@@ -125,13 +125,13 @@ The sample code of Demo is in the [example folder](https://github.com/mdyu1000/r
 
 ## Frequently Asked Questions
 
-**Trigger onBackdropPress event when click View**
+### Trigger onBackdropPress event when click View
 Wrap TouchableWithoutFeedback on the outer layer of View, because View has a [pointer-event](https://reactnative.dev/docs/view#pointerevents) props, TouchableWithoutFeedback can stop the bubble propagation.
 
-**My Modal is invisible**
+### My Modal is invisible
 Check layer order of View, the module is base on View, you should place it at the end of all components. 
 
-**How to place Modal to the bottom?**
+### How to place Modal to the bottom?
 ```JSX
 <Modal
   isVisible={isModalVisible}
@@ -139,11 +139,11 @@ Check layer order of View, the module is base on View, you should place it at th
 />
 ```
 
-**How to change full modal slide-in start point?**
+### How to change full modal slide-in start point?
 You could refer to [react-native-animatable/definitions/fading-exits.js](https://github.com/oblador/react-native-animatable/tree/master/definitions) source code, overwrite the default value, customize your animation.
 
 
-**Why zIndex default value is 101?**
+### Why zIndex default value is 101?
 Less 100 will be covered by [react-native-reanimated-bottom-sheet](https://github.com/osdnk/react-native-reanimated-bottom-sheet), if you have position absolute component or other use case, this is a very useful props.
 
 
