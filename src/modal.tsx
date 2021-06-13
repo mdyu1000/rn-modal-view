@@ -1,5 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { StyleSheet, View, TouchableWithoutFeedback, StatusBar } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  TouchableWithoutFeedback,
+  StatusBar,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native'
 import * as Animatable from 'react-native-animatable'
 import { IBackdropAnimation, IReactNativeModalView } from './types'
 import { useAndroidBack } from './lib'
@@ -90,18 +97,18 @@ function ReactNativeModalView(props: IReactNativeModalView): React.ReactElement 
           }
         >
           <StatusBar barStyle={hasBackdrop ? 'light-content' : 'dark-content'} />
-          <TouchableWithoutFeedback>
-            <View style={[style || styles.modal]}>
-              <Animatable.View
-                ref={animatedViewRef}
-                animation={animationIn}
-                duration={animationInTiming}
-                onAnimationEnd={handleAnimationEnd}
-              >
-                {children}
-              </Animatable.View>
-            </View>
-          </TouchableWithoutFeedback>
+          <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+            <Animatable.View
+              style={[styles.modal, style || styles.modalDefault]}
+              ref={animatedViewRef}
+              animation={animationIn}
+              duration={animationInTiming}
+              onAnimationEnd={handleAnimationEnd}
+              pointerEvents="box-none"
+            >
+              {children}
+            </Animatable.View>
+          </KeyboardAvoidingView>
         </Animatable.View>
       </View>
     </TouchableWithoutFeedback>
@@ -121,8 +128,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
   },
   modal: {
-    marginTop: 'auto',
-    marginBottom: 'auto',
+    flex: 1,
+  },
+  modalDefault: {
+    justifyContent: 'center',
     marginLeft: 24,
     marginRight: 24,
   },
