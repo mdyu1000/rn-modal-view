@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Pressable, Text, View, StyleSheet, TouchableWithoutFeedback } from 'react-native'
-import Modal from '../../ReactNativeModalView'
+import Modal from 'rn-modal-view'
 import { IDefaultModal } from '../constant/types'
 
 function DefaultModal(props: IDefaultModal): React.ReactElement {
